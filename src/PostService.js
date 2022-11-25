@@ -1,5 +1,5 @@
-import Post from "./src/Post.js";
-import FileService from "./src/FileService.js";
+import Post from "./Post.js";
+import FileService from "./FileService.js";
 
 
 class PostService {
@@ -7,6 +7,7 @@ class PostService {
     async create(post, image) {
         const fileName = FileService.saveImage(image);
         const createPost = await Post.create({...post, image: fileName});
+        console.log(createPost)
         return createPost;
     };
 
