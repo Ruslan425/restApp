@@ -7,9 +7,13 @@ class PostService {
     async create(post, image) {
         const fileName = FileService.saveImage(image);
         const createPost = await Post.create({...post, image: fileName});
-        console.log(createPost)
         return createPost;
     };
+
+    async createWithOutImage(post) {
+        const postNew = await Post.create(post)
+        return postNew
+    }
 
     async getAll() {
         const posts = await Post.find();
