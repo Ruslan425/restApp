@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "jest": {
-    "transform": {}
+    "transform": {},
+    "verbose": true,
+    "forceExit": true
+
   },
   "scripts": {
     "start": "node restapp.js",

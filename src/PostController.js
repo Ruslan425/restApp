@@ -4,15 +4,8 @@ class PostController {
 
    async create(req, res) {
     try {
-        if (!req.files) {
-            const post = await PostService.createWithOutImage(req.body)
-            console.log('no image')
-            res.json(post)
-        } else {
-            const post = await PostService.create(req.body, req.files.image)
-            console.log('image have')
-            res.json(post)
-        }    
+        const post = await PostService.create(req.body, req.files.image)
+        res.json(post)   
     } catch(error) {
         res.status(500).json(error)
     }
