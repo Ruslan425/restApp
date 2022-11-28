@@ -21,7 +21,7 @@ describe('POST /post', () => {
     it('test post code 200', async () => {
         const res = await request(app)
             .post('/api/post')
-            .attach('image', 'D:/repo/restApp/files/487d6a86-5726-43ef-99b7-767189ad9fca.png')
+            .attach('image', 'files/487d6a86-5726-43ef-99b7-767189ad9fca.png')
             .field('author', 'sdasasdg')
             .field('title', 'ffqwfq')
             .field('content', 'fsdfsf')
