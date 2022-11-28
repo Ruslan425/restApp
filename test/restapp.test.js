@@ -3,7 +3,7 @@ import request from 'supertest'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import { mongoose } from 'mongoose';
 import Post from "../src/Post.js";
-
+import fs from "fs";
 
 
 describe('POST /post', () => {
@@ -13,20 +13,31 @@ describe('POST /post', () => {
         await mongoose.connect(mongoserver.getUri())
     })
 
-    afterAll(async() => {
-       await mongoose.disconnect()
-       await mongoose.connection.close()
+    afterAll(async () => {
+        await mongoose.disconnect()
+        await mongoose.connection.close()
     })
 
     it('test post code 200', async () => {
-        const res = await request(app)
+        try {
+            const res = await request(app)
             .post('/api/post')
             .attach('image', 'files/487d6a86-5726-43ef-99b7-767189ad9fca.png')
             .field('author', 'sdasasdg')
             .field('title', 'ffqwfq')
             .field('content', 'fsdfsf')
 
-        expect(res.statusCode).toBe(200)    
+        expect(res.statusCode).toBe(200)  
+        } finally {
+            const post = await Post.find()
+            fs.unlink(`files/${post[0].image}`, (err) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log('file delite')
+                }
+            })
+        }  
     })
 
     it('Whit out image code 404', async() => {
