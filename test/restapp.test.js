@@ -21,7 +21,7 @@ describe('POST /post', () => {
     it('test post code 200', async () => {
         const res = await request(app)
             .post('/api/post')
-            .attach('file', 'D:/Programs/restApp/files/5800e393-bdde-4167-b96d-1d54794feec8.png')
+            .attach('image', 'D:/repo/restApp/files/487d6a86-5726-43ef-99b7-767189ad9fca.png')
             .field('author', 'sdasasdg')
             .field('title', 'ffqwfq')
             .field('content', 'fsdfsf')
@@ -29,13 +29,13 @@ describe('POST /post', () => {
         expect(res.statusCode).toBe(200)    
     })
 
-    it('Whit out image code 500', async() => {
+    it('Whit out image code 404', async() => {
         const res = await request(app).post('/api/post').send({
             "author": "Test Test121",
             "title": "Test title12",
             "content": "My1212 test content"
         })
-        expect(res.statusCode).toBe(500)
+        expect(res.statusCode).toBe(404)
     })
 
     it('Get all product code 200', async() => {
